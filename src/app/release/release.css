@@ -1,0 +1,7 @@
+.no-focus {
+  @apply focus:ring-0 focus:outline-none;
+}
+
+textarea {
+  box-shadow: none !important;
+}
