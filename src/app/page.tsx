@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="main-container">
       <section className="mt-12 flex items-center">
-        <div className="w-1/2">
+        <div className="w-full md:w-1/2">
           <div className="inline-flex items-center gap-2 bg-accent text-main px-6 py-4 rotate-4 hover:rotate-0 transition-all cursor-pointer">
             <Star className="w-5 h-5" />
             Version 2.0

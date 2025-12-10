@@ -44,7 +44,7 @@ export default function Header() {
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        <NavigationMenuItem className="hidden md:block">
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/">
               About
@@ -54,7 +54,7 @@ export default function Header() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Begin Here</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-2 p-2">
+            <ul className="grid w-full md:w-[400px] gap-2 p-2">
               {components.map((component) => (
                 <ListItem
                   key={component.title}
@@ -66,6 +66,13 @@ export default function Header() {
               ))}
             </ul>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="hidden md:block">
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/">
+              API
+            </Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>

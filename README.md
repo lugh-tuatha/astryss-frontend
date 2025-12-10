@@ -1,4 +1,4 @@
-# Voidify
+# Astryss
 
 Send your feelings to the stars — a place for your thoughts to live. The stars are listening.
 
