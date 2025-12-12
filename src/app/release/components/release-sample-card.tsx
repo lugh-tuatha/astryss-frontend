@@ -10,9 +10,9 @@ import { formatDistanceToNow } from 'date-fns';
 import { motion } from "motion/react"
 
 import { Emotion, EMOTION_STYLES } from "@/shared/constants/emotions";
-import { Variant, VARIANT_STYLES } from "@/shared/constants/variants";
+import { Variant, VARIANT_ICONS, VARIANT_STYLES } from "@/shared/constants/variants";
 
-type ReleaseSampleCardProps = {
+type Props = {
   className?: string;
   index: number;
   displayName: string;
@@ -22,13 +22,21 @@ type ReleaseSampleCardProps = {
   createdAt: string;
 }
 
-function ReleaseSampleCard({ className, index, displayName, content, emotion, variants, createdAt }: ReleaseSampleCardProps) {
+const ReleaseSampleCard = memo(function ReleaseSampleCard({ 
+  className, 
+  index, 
+  displayName, 
+  content, 
+  emotion, 
+  variants, 
+  createdAt 
+}: Props) {
   const emotionClass = EMOTION_STYLES[emotion] ?? "bg-gray-300";
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.05 }}
     >
@@ -47,10 +55,11 @@ function ReleaseSampleCard({ className, index, displayName, content, emotion, va
           <div className="flex gap-2">
             {variants?.map((variant) => {
               const variantClass = VARIANT_STYLES[variant] ?? "bg-gray-200";
+              const Icon = VARIANT_ICONS[variant];
               
               return (
                 <Badge key={variant} className={`${variantClass} rounded-none`}>
-                  <Code className='stroke-3'/>
+                  <Icon className='stroke-3'/>
                   {variant}
                 </Badge>
               )
@@ -66,6 +75,6 @@ function ReleaseSampleCard({ className, index, displayName, content, emotion, va
       </Card>
     </motion.div>
   )
-}
+});
 
-export default memo(ReleaseSampleCard);
+export default ReleaseSampleCard;

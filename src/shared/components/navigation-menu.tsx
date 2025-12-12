@@ -23,7 +23,7 @@ const components: { title: string; href: string; description: string }[] = [
     title: "Unsent",
     href: "/unsent",
     description:
-      "Not ready to share? Write the message meant for them but kept for you.",
+      "A collection of text messages that never reached their ddestination.",
   },
   {
     title: "Entries",

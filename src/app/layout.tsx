@@ -6,9 +6,11 @@ import "./globals.css";
 import { Github } from "lucide-react";
 
 import { Button } from "@/vendor/ui/button";
+import { Toaster } from "@/vendor/ui/sonner"
 
 import ReactQueryProvider from "@/shared/lib/react-query-provider";
 import Header from "@/shared/components/navigation-menu";
+import Footer from "@/shared/components/footer";
 // import Footer from "@/shared/components/footer";
 
 const spaceGrotesk = Space_Grotesk({
@@ -39,19 +41,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const res = await fetch("https://api.github.com/repos/lugh-tuatha/astryss-frontend", {
-  //   headers: {
-  //     "User-Agent": "Next.js"
-  //   },
-  //   next: { revalidate: 14400 }
-  // });
-
-  // if (!res.ok) {
-  //   return Response.json({ stars: 0 }, { status: 500 });
-  // }
-
-  // const data = res.ok ? await res.json() : { stargazers_count: 0 };
-
   return (
     <html lang="en">
       <body className={`${jetbrains.className} antialiased`}>
@@ -60,13 +49,14 @@ export default async function RootLayout({
             <Header />
             <Button variant="neutral" className="cursor-pointer hidden md:flex" asChild>
               <Link href="https://github.com/lugh-tuatha/astryss-frontend" target="_blank" >
-                0 Stars
+                2 Stars
                 <Github />
               </Link>
             </Button>
           </header>
           {children}
-          {/* <Footer /> */}
+          <Footer />
+          <Toaster />
         </ReactQueryProvider>
       </body>
     </html>

@@ -1,3 +1,5 @@
+import { History, Wrench, Sparkles } from "lucide-react";
+
 export const VARIANTS = [
   'legacy',
   'dev',
@@ -11,3 +13,9 @@ export const VARIANT_STYLES: Record<Variant, string> = {
   dev: 'bg-purple-300',
   beta: 'bg-blue-300',
 } as const;
+
+export const VARIANT_ICONS: Record<Variant, any> = {
+  legacy: History,
+  dev: Wrench,
+  beta: Sparkles,
+};

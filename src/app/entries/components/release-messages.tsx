@@ -1,12 +1,15 @@
 "use client"
+import { useState } from "react";
+
 import { motion } from "motion/react"
+import { formatDistanceToNow, format } from 'date-fns';
+
+import { Button } from "@/vendor/ui/button";
 
 import { Emotion, EMOTIONS } from "@/shared/constants/emotions";
-import { useMemo, useState } from "react";
-import ReleaseMessagesCard from "./release-messages-card";
 import { EntriesResponse, Entry } from "@/shared/types/entry";
 import { useEntries } from "@/shared/hooks/use-entries";
-import { Button } from "@/vendor/ui/button";
+import ReleaseMessagesCard from "./release-messages-card";
 
 export default function ReleaseMessages({ initialEntries }: { initialEntries: EntriesResponse }) {
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion>('sad');
@@ -16,6 +19,12 @@ export default function ReleaseMessages({ initialEntries }: { initialEntries: En
   });
 
   const allEntries = entries?.pages.flatMap((page) => page.data) ?? [];
+
+  const formattedEntries = allEntries.map((entry) => ({
+    ...entry,
+    createdAtToNow: formatDistanceToNow(new Date(entry.created_at), { addSuffix: true }),
+    createdAtFormatted: format(new Date(entry.created_at), "MMM d, yyyy"),
+  }));
 
   if (error) {
     return (
@@ -38,7 +47,7 @@ export default function ReleaseMessages({ initialEntries }: { initialEntries: En
           <motion.button
             key={emotion}
             onClick={() => setSelectedEmotion(emotion)}
-            className={`px-6 py-3 border-4 border-accent cursor-pointer ${selectedEmotion === emotion ? 'bg-accent text-main' : 'bg-white text-black'}`}
+            className={`will-change-transform px-6 py-3 border-4 border-accent cursor-pointer ${selectedEmotion === emotion ? 'bg-accent text-main' : 'bg-white text-black'}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -48,15 +57,18 @@ export default function ReleaseMessages({ initialEntries }: { initialEntries: En
       </motion.div>
 
       <div className="mt-10 grid md:grid-cols-3 gap-10">
-        {allEntries.map((entry: Entry, index: number) => (
+        {formattedEntries.map((entry: Entry, index: number) => (
           <ReleaseMessagesCard 
             key={entry._id}
+            id={entry._id}
             displayName={entry.displayName}
             avatarUrl={entry.avatarUrl}
+            title={entry.title}
             content={entry.content}
             emotion={entry.emotion}
             variants={entry.variants}
-            createdAt={entry.created_at}
+            createdAtToNow={entry.createdAtToNow}
+            createdAtFormatted={entry.createdAtFormatted}
             index={index}
             className={index % 4 === 0 ? 'rotate-1' : index % 3 === 1 ? '-rotate-1' : index % 3 === 1 ? 'rotate-2' : 'rotate-1'}
           />
