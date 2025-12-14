@@ -23,7 +23,7 @@ export default async function EntriesPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <Card className="inline-flex px-8 mx-auto mt-8 bg-chart-3 rounded-none">
+        <Card className="inline-flex px-8 mx-auto mt-8 bg-chart-3">
           <h1 className="text-xl md:text-6xl text-center font-normal">RELEASED MESSAGES</h1>
         </Card>
         <p className="mt-4 md:text-xl font-normal">Anonymous thoughts and feelings from the community</p>

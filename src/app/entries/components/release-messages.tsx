@@ -12,10 +12,13 @@ import { useEntries } from "@/shared/hooks/use-entries";
 import ReleaseMessagesCard from "./release-messages-card";
 
 export default function ReleaseMessages({ initialEntries }: { initialEntries: EntriesResponse }) {
-  const [selectedEmotion, setSelectedEmotion] = useState<Emotion>('sad');
+  const [selectedEmotion, setSelectedEmotion] = useState<Emotion | undefined>();
 
-  const { data: entries, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useEntries(18, {
-    initialData: initialEntries,
+  const { data: entries, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useEntries({ 
+    limit: 18, 
+    type: 'release', 
+    emotion: selectedEmotion,
+    initialData: !selectedEmotion ? initialEntries : undefined,    
   });
 
   const allEntries = entries?.pages.flatMap((page) => page.data) ?? [];

@@ -4,9 +4,7 @@ import ReleaseSampleCard from "./release-sample-card";
 import { EntriesResponse, Entry } from "@/shared/types/entry";
 
 export default function ReleaseSample({ initialEntries }: { initialEntries: EntriesResponse }) {
-  const { data, isFetchingNextPage, error } = useEntries(6, {
-    initialData: initialEntries,
-  });
+  const { data, isFetchingNextPage, error } = useEntries({ limit: 6, type: 'release', initialData: initialEntries });
 
   const entries = data?.pages.flatMap((page) => page.data) ?? [];
   

@@ -4,14 +4,15 @@ import { motion } from "motion/react"
 
 import { cn } from "@/vendor/lib/utils";
 import { Badge } from "@/vendor/ui/badge";
-import { Button } from "@/vendor/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/vendor/ui/avatar";
 import { Card, CardContent, CardFooter, CardHeader } from "@/vendor/ui/card";
 
-import { Code, Share2, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 import { Emotion, EMOTION_STYLES } from "@/shared/constants/emotions";
 import { Variant, VARIANT_ICONS, VARIANT_STYLES } from "@/shared/constants/variants";
+import Link from "next/link";
+import ShareButtons from "@/shared/components/share-buttons";
 
 type Props = {
   id: string;
@@ -38,29 +39,31 @@ const ReleaseMessagesCard = memo(function ReleaseMessagesCard({
   emotion, 
   variants, 
   createdAtToNow,
-  createdAtFormatted
+  createdAtFormatted,
 }: Props) {
   const emotionClass = EMOTION_STYLES[emotion] ?? "bg-gray-300";
+  
   return (
     <motion.div
       className={cn(
         className,
         "will-change-transform",
-      )} 
+      )}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: (index % 18) * 0.05 }}
-      onClick={() => console.log(id)}
     >
-      <Card className="rounded-none border-4">
+      <Card className="border-4">
         <CardHeader className="border-b-4 py-4 px-4 -mt-6 bg-white">
           <Sparkles className='w-5 h-5 absolute right-5'/>
 
           <div className="flex items-center gap-4">
             <Avatar className="rounded-none">
               <AvatarImage src={avatarUrl} alt="Avatar" />
-              <AvatarFallback>A</AvatarFallback>
+              <AvatarFallback>
+                {displayName.charAt(0).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
             <div>
               <h1 className="text-sm font-bold line-clamp-1">{displayName}</h1>
@@ -75,7 +78,7 @@ const ReleaseMessagesCard = memo(function ReleaseMessagesCard({
               const Icon = VARIANT_ICONS[variant];
 
               return (
-                <Badge key={variant} className={`${variantClass} rounded-none`}>
+                <Badge key={variant} className={`${variantClass}`}>
                   <Icon className='stroke-3'/>
                   {variant}
                 </Badge>
@@ -83,24 +86,28 @@ const ReleaseMessagesCard = memo(function ReleaseMessagesCard({
             })}
           </div>
         </CardHeader>
-        <CardContent className={`px-4 py-4 -my-6 relative ${emotionClass}`}>
-          <Image 
-            src={`/assets/emotions/${emotion}.png`} 
-            width={150} 
-            height={150} 
-            alt="sadness" 
-            className="absolute h-full top-0 right-0 opacity-15"
-          />
-          <h2 className="font-bold text-lg mb-1">{title}</h2>
-          <p className="leading-relaxed min-h-36 line-clamp-6 opacity-75">{content}</p>
-        </CardContent>
+        
+        <Link href={`/entries/${id}`}>
+          <CardContent className={`px-4 py-4 -my-6 relative ${emotionClass}`}>
+            <Image
+              src={`/assets/emotions/${emotion}.png`}
+              width={150}
+              height={150}
+              alt="sadness"
+              className="absolute h-full w-auto top-0 right-0 opacity-15"
+            />
+            <h2 className="font-bold text-lg mb-1">{title}</h2>
+            <p className="leading-relaxed min-h-36 line-clamp-6 opacity-75">{content}</p>
+          </CardContent>
+        </Link>
+
         <CardFooter className="border-t-4 px-4 py-4 -mb-6 flex justify-between bg-white">
-          <Button variant="noShadow" className="cursor-pointer rounded-none">
-            <Share2 />
-          </Button>
-          <p className="text-sm opacity-50">
-            {createdAtFormatted}
-          </p>
+          <ShareButtons
+            url={`https://astryss.com/entries/${id}`}
+            title={title}
+            description={content}
+          />
+          <p className="text-sm opacity-50">{createdAtFormatted}</p>
         </CardFooter>
       </Card> 
     </motion.div>

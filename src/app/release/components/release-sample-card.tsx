@@ -5,7 +5,7 @@ import { cn } from "@/vendor/lib/utils";
 import { Badge } from "@/vendor/ui/badge";
 import { Card, CardContent, CardFooter } from "@/vendor/ui/card";
 
-import { Code, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { formatDistanceToNow } from 'date-fns';
 import { motion } from "motion/react"
 
@@ -42,14 +42,20 @@ const ReleaseSampleCard = memo(function ReleaseSampleCard({
     >
       <Card
         className={cn(
-          "rounded-none border-4 rotate-2 flex flex-col justify-between h-full",
+          "border-4 rotate-2 flex flex-col justify-between h-full",
           emotionClass,
           className
         )} 
       >
         <CardContent className='text-sm flex flex-col gap-3'>
           <Sparkles className='w-5 h-5 absolute right-5'/>
-          <Image src={`/assets/emotions/${emotion}.png`} width={150} height={150} alt="sadness" className="absolute h-full top-0 right-0 -z-40 opacity-15"/>
+          <Image 
+            src={`/assets/emotions/${emotion}.png`} 
+            width={150} 
+            height={150} 
+            alt="sadness" 
+            className="absolute h-full w-auto top-0 right-0 -z-40 opacity-15"
+          />
           <p className='mt-1 leading-relaxed w-9/10 line-clamp-3'>{content}</p>
           
           <div className="flex gap-2">
@@ -58,7 +64,7 @@ const ReleaseSampleCard = memo(function ReleaseSampleCard({
               const Icon = VARIANT_ICONS[variant];
               
               return (
-                <Badge key={variant} className={`${variantClass} rounded-none`}>
+                <Badge key={variant} className={`${variantClass}`}>
                   <Icon className='stroke-3'/>
                   {variant}
                 </Badge>

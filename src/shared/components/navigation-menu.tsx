@@ -1,6 +1,5 @@
 "use client"
 
-import { cn } from "@/vendor/lib/utils";
 import { 
   NavigationMenu, 
   NavigationMenuContent, 
@@ -44,7 +43,7 @@ export default function Header() {
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem className="hidden md:block">
+        <NavigationMenuItem className="hidden">
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/">
               About
@@ -67,7 +66,7 @@ export default function Header() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem className="hidden md:block">
+        <NavigationMenuItem className="hidden">
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/">
               API

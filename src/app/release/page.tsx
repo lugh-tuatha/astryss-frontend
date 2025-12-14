@@ -47,6 +47,7 @@ export default async function ReleasePage() {
 
         <div className="inline-flex items-center gap-2 bg-chart-3 px-6 py-2 -rotate-1 mt-8 text-foreground border-4">
           The stars are listening.
+          
           <Sparkle className="w-5 h-5"/>
         </div>
 

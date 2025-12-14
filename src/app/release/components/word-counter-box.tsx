@@ -20,7 +20,7 @@ export default function WordCounterBox() {
 
   return (
     <>
-      <Card className="mt-10 w-full md:w-1/2 p-0 border-4 gap-0 rounded-none -rotate-2">
+      <Card className="mt-10 w-full md:w-1/2 p-0 border-4 gap-0 -rotate-2">
         <CardContent className="p-0">
           <Textarea 
             value={content}

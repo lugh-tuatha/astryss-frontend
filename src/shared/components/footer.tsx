@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-accent">
-      <div className="main-container md:mt-50 md:pt-40 py-6 w-full  relative ">
+    <footer className="bg-accent mt-12 md:mt-54">
+      <div className="main-container md:pt-40 py-6 w-full  relative ">
         <div className="md:absolute md:-top-36 md:left-1/2 md:-translate-x-1/2 inline-block border-accent border-4 bg-main px-8 py-8 space-y-5">
           <h1 className="md:text-6xl font-black">Ready to share?</h1>
           <p className="leading-relaxed opacity-75">You're not alone. Hundreds of voices are already whispering their stories into the stars — and yours might be the one someone needs tonight.</p>

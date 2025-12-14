@@ -1,13 +1,25 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createEntry, getEntries } from "../service/entries";
-import { EntriesResponse } from "../types/entry";
 import { toast } from "sonner";
 
-export function useEntries(limit: number = 18, options?: { initialData?: EntriesResponse }) {
-  return useInfiniteQuery({
-    queryKey: ["entries", limit],
+import { createEntry, getEntries, getEntry } from "../service/entries";
+import { EntriesResponse } from "../types/entry";
+import { Emotion } from "../constants/emotions";
+import { EntryType } from "../constants/entry-type";
 
-    queryFn: ({ pageParam }) => getEntries(limit, pageParam),
+interface UseEntriesOptions {
+  type?: EntryType;
+  emotion?: Emotion;
+  limit?: number;
+  initialData?: EntriesResponse;
+}
+
+export function useEntries(options: UseEntriesOptions = {}) {
+  const { type, emotion, limit = 18, initialData } = options;
+
+  return useInfiniteQuery({
+    queryKey: ["entries", { limit, type, emotion }],
+
+    queryFn: ({ pageParam }) => getEntries(limit, pageParam, type, emotion),
 
     getNextPageParam: (lastPage) => {
       return lastPage.meta.hasMore ? lastPage.meta.nextCursor : undefined;
@@ -15,8 +27,8 @@ export function useEntries(limit: number = 18, options?: { initialData?: Entries
 
     initialPageParam: undefined as string | undefined,
 
-    initialData: options?.initialData ? {
-      pages: [options.initialData],
+    initialData: initialData ? {
+      pages: [initialData],
       pageParams: [undefined],
     } : undefined,
     
@@ -40,5 +52,12 @@ export function useCreateEntry() {
       toast.error(error.message || "Failed to send your message");
       console.log(error);
     },
+  });
+}
+
+export function useEntry(id: string) {
+  return useQuery({
+    queryKey: ["entry", id],
+    queryFn: () => getEntry(id),
   });
 }
