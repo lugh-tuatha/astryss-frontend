@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import Image from "next/image";
 
 import { motion } from "motion/react"
 import { formatDistanceToNow, format } from 'date-fns';
@@ -7,14 +8,14 @@ import { formatDistanceToNow, format } from 'date-fns';
 import { Button } from "@/vendor/ui/button";
 
 import { Emotion, EMOTIONS } from "@/shared/constants/emotions";
-import { EntriesResponse, Entry } from "@/shared/types/entry";
-import { useEntries } from "@/shared/hooks/use-entries";
+import { EntriesResponse, Entry } from "@/features/entries/types/entry.types";
+import { useEntries } from "@/features/entries/hooks/use-entries";
 import ReleaseMessagesCard from "./release-messages-card";
 
 export default function ReleaseMessages({ initialEntries }: { initialEntries: EntriesResponse }) {
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion | undefined>();
 
-  const { data: entries, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useEntries({ 
+  const { data: entries, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, error } = useEntries({ 
     limit: 18, 
     type: 'release', 
     emotion: selectedEmotion,
@@ -59,24 +60,37 @@ export default function ReleaseMessages({ initialEntries }: { initialEntries: En
         ))}
       </motion.div>
 
-      <div className="mt-10 grid md:grid-cols-3 gap-10">
-        {formattedEntries.map((entry: Entry, index: number) => (
-          <ReleaseMessagesCard 
-            key={entry._id}
-            id={entry._id}
-            displayName={entry.displayName}
-            avatarUrl={entry.avatarUrl}
-            title={entry.title}
-            content={entry.content}
-            emotion={entry.emotion}
-            variants={entry.variants}
-            createdAtToNow={entry.createdAtToNow}
-            createdAtFormatted={entry.createdAtFormatted}
-            index={index}
-            className={index % 4 === 0 ? 'rotate-1' : index % 3 === 1 ? '-rotate-1' : index % 3 === 1 ? 'rotate-2' : 'rotate-1'}
+      {isLoading ? (
+        <div className="flex flex-col items-center gap-4 backdrop-blur-md mt-6">
+          <Image 
+            width={320} 
+            height={180} 
+            src="/assets/gifs/neon-cat.gif" 
+            alt="Neon Cat" 
+            className="h-40 rounded-base shadow-lg shadow-monochromatic-dark" 
           />
-        ))}
-      </div>
+          <p className="font-semibold">Hacking NASA for data . . .</p>
+        </div>
+      ) : (
+        <div className="mt-10 grid md:grid-cols-3 gap-10">
+          {formattedEntries.map((entry: Entry, index: number) => (
+            <ReleaseMessagesCard 
+              key={entry._id} 
+              id={entry._id}
+              displayName={entry.displayName}
+              avatarUrl={entry.avatarUrl}
+              title={entry.title}
+              content={entry.content}
+              emotion={entry.emotion}
+              variants={entry.variants}
+              createdAtToNow={entry.createdAtToNow}
+              createdAtFormatted={entry.createdAtFormatted}
+              index={index}
+              className={index % 4 === 0 ? 'rotate-1' : index % 3 === 1 ? '-rotate-1' : index % 3 === 1 ? 'rotate-2' : 'rotate-1'}
+            />
+          ))}
+        </div>
+      )}
 
       {hasNextPage && (
         <div className="flex justify-center">

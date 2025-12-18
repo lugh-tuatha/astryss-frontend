@@ -17,8 +17,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import AvatarPreview from "./avatar-preview";
-import { CreateEntryInput, createEntrySchema } from "@/shared/lib/schemas/entry.schema";
-import { useCreateEntry } from "@/shared/hooks/use-entries";
+import { CreateEntryInput, createEntrySchema } from "@/features/entries/schema/entry.schema";
+import { useCreateEntry } from "@/features/entries/hooks/use-entries";
 import { EMOTIONS } from "@/shared/constants/emotions";
 
 type Props = {
@@ -51,7 +51,7 @@ export default function IdentityConfirmationModal({ isOpen, setIsOpen, content }
     }
   }, [isOpen, content, form]);
 
-  function handleFileChange(e: any) {
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
       setAvatarPreview(file);
@@ -128,7 +128,7 @@ export default function IdentityConfirmationModal({ isOpen, setIsOpen, content }
                   <FormItem>
                     <FormLabel className="px-1">Emotion</FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange}>
+                      <Select value={field.value} onValueChange={field.onChange}>
                         <SelectTrigger className="bg-white">
                           <span>
                             {field.value.charAt(0).toUpperCase() + field.value.slice(1)}
@@ -162,7 +162,7 @@ export default function IdentityConfirmationModal({ isOpen, setIsOpen, content }
                     <FormControl>
                       <Input 
                         type="file" 
-                        accept="image/png, image/jpeg, image/jpg" 
+                        accept="image/png, image/jpeg, image/jpg"
                         onChange={(e) => {
                           handleFileChange(e);
                           onChange(e.target.files);

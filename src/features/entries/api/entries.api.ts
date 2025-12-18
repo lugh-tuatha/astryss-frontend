@@ -1,16 +1,16 @@
-import { CreateEntryInput } from "../lib/schemas/entry.schema";
-import { EntriesResponse, Entry } from "../types/entry";
-import { BASE_URL } from "../utils/constants";
-import { Emotion } from "../constants/emotions";
-import { EntryType } from "../constants/entry-type";
-import { Variant } from "../constants/variants";
+import { CreateEntryInput } from "../schema/entry.schema";
+import { EntriesResponse, Entry, CreateEntryDTO } from "../types/entry.types";
+import { API_CONFIG } from "@/shared/config/api.config"; 
+import { Emotion } from "@/shared/constants/emotions";
+import { EntryType } from "@/shared/constants/entry-type";
+import { ApiResponse } from "@/shared/types/api.types";
 
 export async function getEntries(
   limit: number, 
   cursor?: string,
   type?: EntryType,
   emotion?: Emotion
-) {
+): Promise<EntriesResponse> {
   try {
     const params = new URLSearchParams({
       limit: limit.toString(),
@@ -28,12 +28,10 @@ export async function getEntries(
       params.append('emotion', emotion);
     }
 
-    const url = `${BASE_URL}/entries?${params.toString()}`;
+    const url = `${API_CONFIG.BASE_URL}/entries?${params.toString()}`;
 
     const response = await fetch(url, {
-      next: {
-        revalidate: 5 * 60 * 1000,
-      },
+      cache: 'no-cache',
     });
 
     if (!response.ok) {
@@ -53,22 +51,7 @@ export async function getEntries(
   }
 }
 
-export async function getEntriesServerSide(limit: number): Promise<EntriesResponse> {
-  return getEntries(limit);
-}
-
-export interface CreateEntryResponse {
-  id: string;
-  displayName?: string;
-  content: string;
-  avatarUrl: string;
-  type: string;
-  emotion?: string;
-  variants?: Variant[];
-  createdAt: string;
-}
-
-export async function createEntry(data: CreateEntryInput): Promise<CreateEntryResponse> {
+export async function createEntry(data: CreateEntryInput): Promise<ApiResponse<CreateEntryDTO>> {
   const formData = new FormData();
 
   if (data.displayName) {
@@ -89,7 +72,7 @@ export async function createEntry(data: CreateEntryInput): Promise<CreateEntryRe
     formData.append("image", data.avatar[0]);
   }
 
-  const response = await fetch(`${BASE_URL}/entries`, {
+  const response = await fetch(`${API_CONFIG.BASE_URL}/entries`, {
     method: "POST",
     body: formData,
   });
@@ -102,24 +85,26 @@ export async function createEntry(data: CreateEntryInput): Promise<CreateEntryRe
   return response.json();
 }
 
-export async function getEntry(id: string) {
+export async function getEntry(id: string): Promise<Entry | null> {
   try {
-    const url = `${BASE_URL}/entries/${id}`;
+    const url = `${API_CONFIG.BASE_URL}/entries/${id}`;
 
     const response = await fetch(url, {
       next: {
-        revalidate: 5 * 60 * 1000,
+        revalidate: 300,
         tags: [`entry-${id}`],
       },
     });
 
+    console.log(response)
+
     if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      return null;
     }
 
-    const data: Entry = await response.json();
+    const data: ApiResponse<Entry> = await response.json();
 
-    return data;
+    return data.data;
   } catch (error) {
     if (error instanceof Error) {
       console.error('Fetch error:', error.message);

@@ -8,7 +8,7 @@ import { Github } from "lucide-react";
 import { Button } from "@/vendor/ui/button";
 import { Toaster } from "@/vendor/ui/sonner"
 
-import ReactQueryProvider from "@/shared/lib/react-query-provider";
+import ReactQueryProvider from "@/shared/providers/react-query-provider";
 import Header from "@/shared/components/navigation-menu";
 import Footer from "@/shared/components/footer";
 // import Footer from "@/shared/components/footer";

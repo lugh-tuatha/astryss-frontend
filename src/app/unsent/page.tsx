@@ -8,7 +8,7 @@ import PageUnderDevelopment from "@/shared/components/page-under-development";
 export const metadata: Metadata = {
   title: 'Unsent - astryss*',
   description: 'A collection of text messages that never reached their destination.',
-  keywords: ["astryss", "freedom wall", "anonymous messages", "the unsent project"],
+  keywords: ["freedom wall", "anonymous messages", "the unsent project"],
   openGraph: {
     title: "",
     description: "A collection of text messages that never reached their ddestination.",

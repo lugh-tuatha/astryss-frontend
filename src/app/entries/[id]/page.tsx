@@ -1,5 +1,7 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 import { ArrowLeft } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
@@ -12,24 +14,62 @@ import { Button } from "@/vendor/ui/button";
 import { EMOTION_STYLES } from "@/shared/constants/emotions";
 import { Variant, VARIANT_ICONS, VARIANT_STYLES } from "@/shared/constants/variants";
 import ShareButtons from "@/shared/components/share-buttons";
-import { getEntry } from "@/shared/service/entries";
+import { getEntry } from "@/features/entries/api/entries.api";
 
-export default async function EntryPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const entry = await getEntry(id);
+type Props = {
+  params: Promise<{ id: string }>;
+};
 
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  const entry = await getEntry(params.id);
+  
   if (!entry) {
     return {
-      title: "Entry not found - astryss",
+      title: "Entry Not Found",
+      description: "The requested entry could not be found",
     };
+  }
+
+  const description = entry.content.slice(0, 160);
+  const url = `https://astryss.com/entries/${entry._id}`;
+
+  return {
+    title: `${entry.title} — astryss*`,
+    description: description,
+    keywords: [entry.title, entry.displayName],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${entry.title} — astryss*`,
+      description: description,
+      url: url,
+      images: ["/assets/entry-og.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${entry.title} — astryss*`,
+      description: description,
+      images: ["/assets/entry-og.png"],
+    },
+  };
+}
+
+export default async function EntryPage(props: Props) {
+  const params = await props.params;
+  const entry = await getEntry(params.id);
+
+  if (!entry) {
+    notFound();
   }
 
   const emotionClass = EMOTION_STYLES[entry.emotion];
   const variants: Variant[] = entry.variants || [];
 
   const createdAt = new Date(entry.created_at);
-  const createdAtToNow = formatDistanceToNow(createdAt, { addSuffix: true });
-  const createdAtFormatted = format(createdAt, "MMMM d, yyyy 'at' h:mm a");
+  const relativeTime = formatDistanceToNow(createdAt, { addSuffix: true });
+  const fullDate = format(createdAt, "MMMM d, yyyy 'at' h:mm a");
 
   return (
     <main className="main-container">
@@ -53,7 +93,7 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
 
               <div>
                 <h1 className="text-lg font-bold line-clamp-1">{entry.displayName}</h1>
-                <p className="opacity-50">{createdAtToNow}</p>
+                <p className="opacity-50">{relativeTime}</p>
                 <div className="flex gap-2 mt-2">
                             {variants?.map((variant) => {
                     const variantClass = VARIANT_STYLES[variant] ?? "bg-gray-200";
@@ -91,7 +131,7 @@ export default async function EntryPage({ params }: { params: Promise<{ id: stri
               description={entry.content}
             />
 
-            <p className="text-sm opacity-50">{createdAtFormatted}</p>
+            <p className="text-sm opacity-50">{fullDate}</p>
           </CardFooter>
         </Card>
 

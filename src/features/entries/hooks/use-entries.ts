@@ -1,10 +1,10 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { createEntry, getEntries, getEntry } from "../service/entries";
-import { EntriesResponse } from "../types/entry";
-import { Emotion } from "../constants/emotions";
-import { EntryType } from "../constants/entry-type";
+import { createEntry, getEntries, getEntry } from "../api/entries.api";
+import { EntriesResponse } from "../types/entry.types";
+import { Emotion } from "../../../shared/constants/emotions";
+import { EntryType } from "../../../shared/constants/entry-type";
 
 interface UseEntriesOptions {
   type?: EntryType;

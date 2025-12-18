@@ -4,17 +4,17 @@ import * as motion from "motion/react-client";
 
 import { Card } from "@/vendor/ui/card";
 
-import ReleaseMessages from "./components/release-messages";
-import { getEntriesServerSide } from "@/shared/service/entries";
+import ReleaseMessages from "../../features/entries/components/release-messages";
+import { getEntries } from "@/features/entries/api/entries.api";
 
 export const metadata: Metadata = {
-  title: 'Entries - astryss*',
-  description: 'Browse all public entries created accross the platform.',
-  keywords: ["astryss", "freedom wall entries", "astryss entries", "public confessions", "anonymous pinoy confession"]
+  title: "Entries - astryss*",
+  description: "B rowse all public entries created accross the platform.",
+  keywords: ["freedom wall entries", "astryss entries", "public confessions", "anonymous pinoy confession"]
 };
 
 export default async function EntriesPage() {
-  const entries = await getEntriesServerSide(18);
+  const entries = await getEntries(18);
 
   return (
     <main className="main-container">

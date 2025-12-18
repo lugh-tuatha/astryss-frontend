@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function PageUnderDevelopment() {
   return (
     <div className="text-center text-red-600 py-8 space-y-4">
-      <p className="text-sm">This page is still hacking NASA for data. Come back soon!</p>
+      <p className="text-sm">This page is still under development. Come back soon!</p>
       <p className="text-sm">For now, here's a meme.</p>
       <Image 
         src="/assets/meme/skibidi-bop.png" 

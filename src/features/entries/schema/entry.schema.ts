@@ -11,20 +11,14 @@ export const createEntrySchema = z.object({
   emotion: z.enum(["sad", "angry", "inlove", "other"]),
   variants: z.array(z.enum(["legacy", "dev", "beta"])).optional(),
   avatar: z
-    .custom<FileList>()
+    .instanceof(FileList)
     .optional()
-    .refine((files) => {
-      if (!files || files.length === 0) return true;
-      return files.length === 1;
-    }, "Please select only one file")
-    .refine((files) => {
-      if (!files || files.length === 0) return true;
-      return files[0].size <= MAX_FILE_SIZE;
-    }, "File size must be less than 2MB")
-    .refine((files) => {
-      if (!files || files.length === 0) return true;
-      return ACCEPTED_IMAGE_TYPES.includes(files[0].type);
-    }, "Only PNG, JPG, and JPEG files are allowed"),
+    .refine(files => !files || files.length <= 1, "Only one file allowed")
+    .refine(files => !files || files[0]?.size <= MAX_FILE_SIZE, "Max 2MB")
+    .refine(
+      files => !files || ACCEPTED_IMAGE_TYPES.includes(files[0]?.type),
+      "Invalid file type"
+    ),
 });
 
 export type CreateEntryInput = z.infer<typeof createEntrySchema>;

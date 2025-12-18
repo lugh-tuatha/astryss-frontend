@@ -5,14 +5,14 @@ import { Sparkle } from "lucide-react";
 import * as motion from "motion/react-client";
 
 import TypewriterText from "@/shared/components/typewriter-text";
-import { getEntriesServerSide } from '@/shared/service/entries';
-import ReleaseSample from './components/release-samples';
-import WordCounterBox from './components/word-counter-box';
+import { getEntries } from '@/features/entries/api/entries.api';
+import ReleaseSample from '@/features/release/components/release-samples';
+import WordCounterBox from '@/features/release/components/word-counter-box';
 
 export const metadata: Metadata = {
   title: 'Release - astryss*',
   description: 'Release your feelings to the stars — a place for your thoughts to live.',
-  keywords: ["astryss", "freedom wall", "anonymous messages", "online diary", "safe space to share feelings"],
+  keywords: ["freedom wall", "anonymous messages", "release feelings", "online diary", "safe space to share feelings"],
   openGraph: {
     title: "",
     description: "Release your feelings to the stars — a place for your thoughts to live. The stars are listening.",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ReleasePage() {
-  const entries = await getEntriesServerSide(6);
+  const entries = await getEntries(6);
 
   return (
     <main className="main-container">

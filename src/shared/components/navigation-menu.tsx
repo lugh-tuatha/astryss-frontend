@@ -43,9 +43,9 @@ export default function Header() {
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem className="hidden">
+        <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/">
+            <Link href="/about">
               About
             </Link>
           </NavigationMenuLink>
