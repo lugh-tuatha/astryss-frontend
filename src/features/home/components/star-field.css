@@ -1,0 +1,18 @@
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    #fffbe6 0%,
+    #e6d8b5 40%,
+    #b7acb4 70%
+  );
+
+  box-shadow:
+    0 0 6px rgba(255, 255, 200, 0.8),
+    0 0 20px rgba(255, 255, 160, 0.5),
+    0 0 40px rgba(255, 255, 120, 0.3);
+}

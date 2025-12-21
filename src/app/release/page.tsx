@@ -12,7 +12,7 @@ import WordCounterBox from '@/features/release/components/word-counter-box';
 export const metadata: Metadata = {
   title: 'Release - astryss*',
   description: 'Release your feelings to the stars — a place for your thoughts to live.',
-  keywords: ["freedom wall", "anonymous messages", "release feelings", "online diary", "safe space to share feelings"],
+  keywords: ["astryss", "freedom wall", "anonymous messages", "release feelings", "online diary", "safe space to share feelings"],
   openGraph: {
     title: "",
     description: "Release your feelings to the stars — a place for your thoughts to live. The stars are listening.",
@@ -29,13 +29,13 @@ export default async function ReleasePage() {
   const entries = await getEntries(6);
 
   return (
-    <main className="main-container">
+    <main className="main-container pt-12 md:pt-20">
       <motion.section 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="mt-8 flex flex-col items-center"
       >
-        <h1 className="text-6xl text-accent">astryss*</h1>
+        <h1 className="text-6xl text-accent font-bold">astryss*</h1>
 
         <div className="flex bg-accent px-6 py-4 rotate-2 mt-6 text-secondary-background">
           <div>

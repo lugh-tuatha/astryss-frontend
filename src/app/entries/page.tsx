@@ -10,14 +10,14 @@ import { getEntries } from "@/features/entries/api/entries.api";
 export const metadata: Metadata = {
   title: "Entries - astryss*",
   description: "B rowse all public entries created accross the platform.",
-  keywords: ["freedom wall entries", "astryss entries", "public confessions", "anonymous pinoy confession"]
+  keywords: ["astryss", "freedom wall entries", "astryss entries", "public confessions", "anonymous pinoy confession", "write anonymously online"]
 };
 
 export default async function EntriesPage() {
   const entries = await getEntries(18);
 
   return (
-    <main className="main-container">
+    <main className="main-container pt-12 md:pt-20">
       <motion.div 
         className="text-center"
         initial={{ opacity: 0, y: 20 }}

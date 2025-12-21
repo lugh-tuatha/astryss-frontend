@@ -1,11 +1,7 @@
-import { Space_Grotesk, JetBrains_Mono } from "next/font/google"
+import { Space_Grotesk, JetBrains_Mono, Inter_Tight } from "next/font/google"
 import type { Metadata } from "next";
-import Link from "next/link";
 import "./globals.css";
 
-import { Github } from "lucide-react";
-
-import { Button } from "@/vendor/ui/button";
 import { Toaster } from "@/vendor/ui/sonner"
 
 import ReactQueryProvider from "@/shared/providers/react-query-provider";
@@ -22,6 +18,12 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
 })
+
+const interTight = Inter_Tight({
+  variable: "--font-year",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://astryss.com"),
@@ -43,17 +45,9 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jetbrains.className} antialiased`}>
+      <body className={`${jetbrains.className} ${spaceGrotesk.className} ${interTight.variable} antialiased`}>
         <ReactQueryProvider>
-          <header className="mt-4 flex justify-center items-center gap-4">
-            <Header />
-            <Button variant="neutral" className="cursor-pointer hidden md:flex" asChild>
-              <Link href="https://github.com/lugh-tuatha/astryss-frontend" target="_blank" >
-                2 Stars
-                <Github />
-              </Link>
-            </Button>
-          </header>
+          <Header />
           {children}
           <Footer />
           <Toaster />

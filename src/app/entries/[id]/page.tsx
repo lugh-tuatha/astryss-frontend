@@ -37,7 +37,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: `${entry.title} — astryss*`,
     description: description,
-    keywords: [entry.title, entry.displayName],
+    keywords: ["astryss", entry.title, entry.displayName],
     alternates: {
       canonical: url,
     },
@@ -72,7 +72,7 @@ export default async function EntryPage(props: Props) {
   const fullDate = format(createdAt, "MMMM d, yyyy 'at' h:mm a");
 
   return (
-    <main className="main-container">
+    <main className="main-container pt-12 md:pt-20">
       <div className="md:w-2/3 mx-auto mt-8">
         <Link href="/entries">
           <Button variant="neutral" className="cursor-pointer">

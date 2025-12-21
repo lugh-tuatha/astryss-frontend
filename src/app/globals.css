@@ -10,6 +10,8 @@
   --main-foreground: oklch(0% 0 0);
   --main: oklch(86.03% 0.176 92.36);
   --accent: oklch(0.1323 0.0894 266.7);
+  --text-900: #0B161E;
+  --text-600: #365261;
   --border: oklch(0% 0 0);
   --ring: oklch(0% 0 0);
   --overlay: oklch(0% 0 0 / 0.8);
@@ -48,6 +50,8 @@
   --color-foreground: var(--foreground);
   --color-main-foreground: var(--main-foreground);
   --color-accent: var(--accent);
+  --color-text-900: var(--text-900);
+  --color-text-600: var(--text-600);
   --color-border: var(--border);
   --color-overlay: var(--overlay);
   --color-ring: var(--ring);
@@ -70,12 +74,19 @@
 @layer base { 
   body {
     @apply text-foreground font-base bg-background;
+    color: var(--color-text-900);
   }
 
   h1, h2, h3, h4, h5, h6{
     font-family: 'Space Grotesk', sans-serif;
   }
 } 
+
+@layer utilities {
+  .font-year {
+    font-family: "Inter Tight", "Inter Tight Fallback";
+  }
+}
 
 .main-container {
   @apply px-4 mx-auto max-w-7xl w-full;

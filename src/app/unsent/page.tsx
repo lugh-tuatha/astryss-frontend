@@ -8,7 +8,7 @@ import PageUnderDevelopment from "@/shared/components/page-under-development";
 export const metadata: Metadata = {
   title: 'Unsent - astryss*',
   description: 'A collection of text messages that never reached their destination.',
-  keywords: ["freedom wall", "anonymous messages", "the unsent project"],
+  keywords: ["astryss", "freedom wall", "anonymous messages", "the unsent project"],
   openGraph: {
     title: "",
     description: "A collection of text messages that never reached their ddestination.",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function EntriesPage() {
   return (
-    <main className="main-container">
+    <main className="main-container pt-12 md:pt-20">
       <motion.div 
         className="text-center"
         initial={{ opacity: 0, y: 20 }}

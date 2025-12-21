@@ -12,7 +12,7 @@ export default function PageUnderDevelopment() {
         alt="Skibidi Bop Yes Meme" 
         width={500} 
         height={500} 
-        className="w-1/2 mx-auto border-4 border-border"
+        className="md:w-1/2 mx-auto border-4 border-border"
       />
       <Link href="/release">
         <Button className="cursor-pointer" variant="neutral">

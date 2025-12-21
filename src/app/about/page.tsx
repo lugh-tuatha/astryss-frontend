@@ -7,6 +7,7 @@ import * as motion from "motion/react-client";
 import { Button } from "@/vendor/ui/button";
 import { Card, CardContent } from "@/vendor/ui/card";
 import Image from "next/image";
+import Timeline from "@/features/about/components/timeline";
 
 export const metadata: Metadata = {
   title: "About - astryss*",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="main-container">
-      <section className="mt-12">
+      <section className="md:h-screen pt-24 md:pt-32">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -28,10 +29,10 @@ export default function AboutPage() {
           Version 2.0
         </motion.div>
 
-        <div className="flex items-center gap-16">
+        <div className="md:flex items-center gap-16">
           <div className="w-full md:w-1/2">
             <motion.h1 
-              className="text-8xl mt-6 text-accent font-black"
+              className="text-6xl md:text-8xl mt-6 text-accent font-black"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.30, ease: "easeOut" }}
@@ -44,7 +45,7 @@ export default function AboutPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
             >
-              <Card className="bg-main mt-8">
+              <Card className="bg-main mt-6 md:mt-8">
                 <CardContent>
                   Send your feelings to the stars — a place for your thoughts to live. The stars are listening.
                 </CardContent>
@@ -52,7 +53,7 @@ export default function AboutPage() {
             </motion.div>
             
             <motion.p 
-              className="mt-8"
+              className="mt-6 md:mt-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.60 }}
@@ -61,7 +62,7 @@ export default function AboutPage() {
             </motion.p>
 
             <motion.div
-              className="mt-8 flex gap-6"
+              className="mt-6 md:mt-8 flex gap-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.75, ease: "easeOut" }}
@@ -78,7 +79,7 @@ export default function AboutPage() {
             </motion.div>
           </div>
 
-          <div className="w-full h-full md:w-1/2 relative flex items-center justify-center">
+          <div className="w-full h-full mt-6 md:mt-0 md:w-1/2 relative flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0}}
@@ -119,6 +120,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <Timeline />
     </main>
   );
 }
