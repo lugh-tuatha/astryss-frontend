@@ -15,24 +15,14 @@ import RandomLetterSwapForward from "@/vendor/fancy/text/random-letter-swap-forw
 export const metadata: Metadata = {
   title: "Home - astryss*",
   description: "astryss* is an anonymous freedom wall where thoughts, emotions, and unspoken feelings are released into the stars. No profiles. No judgment. Just honesty.",
-  keywords: ["astryss", "anonymous sharing", "freedom wall", "freedom wall ph", "star themed website", "space themed website", "masked emotions", "anonywall"]
+  keywords: ["astryss", "anonymous sharing", "freedom wall", "freedom wall ph", "star themed website", "space themed website", "masked emotions", "anonywall", "duoplay"]
 };
 
 export default function Home() {
+
   return (
     <main>
       <section className="main-container mt-24 md:mt-32">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 bg-accent text-main px-6 py-4 rotate-4 hover:rotate-0"
-        >
-          <Star className="w-5 h-5" />
-          Version 2.0
-        </motion.div>
-
         <div className="md:flex items-center">
           <div className="w-full md:w-1/2">
             <motion.h1 
