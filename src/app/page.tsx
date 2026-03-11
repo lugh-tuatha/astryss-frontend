@@ -23,6 +23,9 @@ export default function Home() {
   return (
     <main>
       <section className="main-container mt-24 md:mt-32">
+
+        <button>Version ni CAJAI</button>
+
         <div className="md:flex items-center">
           <div className="w-full md:w-1/2">
             <motion.h1 
