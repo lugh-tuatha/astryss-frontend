@@ -80,7 +80,7 @@ export default function IdentityConfirmationModal({ isOpen, setIsOpen, content }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent>
+      <DialogContent className="max-h-[75dvh] overflow-y-auto sm:max-h-[85vh]">
         <DialogHeader>
           <DialogTitle>Before your message reaches the stars...</DialogTitle>
           <DialogDescription className="opacity-75">
