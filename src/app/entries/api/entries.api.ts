@@ -31,7 +31,9 @@ export async function getEntries(
     const url = `${API_CONFIG.BASE_URL}/entries?${params.toString()}`;
 
     const response = await fetch(url, {
-      cache: 'no-cache',
+      next: {
+        revalidate: 60
+      }
     });
 
     if (!response.ok) {
