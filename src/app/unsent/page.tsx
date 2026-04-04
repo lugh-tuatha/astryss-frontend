@@ -38,11 +38,9 @@ export default function EntriesPage() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto mt-8"
+          className="mx-auto mt-8"
         >
-          <Card className="bg-chart-4 p-8 md:p-12 relative rotate-1 hover:rotate-0 transition-transform duration-300">
-            <FileWarning className="absolute -top-8 -right-8 w-16 h-16 text-black rotate-12 bg-white rounded-full p-2 border-4 border-accent" />
-            
+          <Card className="bg-chart-4 p-8 md:p-12 rotate-1 hover:rotate-0 transition-transform duration-300">
             <h2 className="text-2xl md:text-5xl font-black uppercase leading-tight">
               Have something you<br/>can't send?
             </h2>

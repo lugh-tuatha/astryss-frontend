@@ -15,7 +15,7 @@ import RandomLetterSwapForward from "@/vendor/fancy/text/random-letter-swap-forw
 export const metadata: Metadata = {
   title: "Home - astryss*",
   description: "astryss* is an anonymous freedom wall where thoughts, emotions, and unspoken feelings are released into the stars. No profiles. No judgment. Just honesty.",
-  keywords: ["astryss", "anonymous sharing", "freedom wall", "freedom wall ph", "star themed website", "space themed website", "masked emotions", "anonywall", "duoplay"]
+  keywords: ["astryss", "anonymous sharing", "freedom wall", "freedom wall ph", "star themed website", "space themed website", "masked emotions", "anonywall", "duoplay", "acethekawaii"]
 };
 
 export default function Home() {

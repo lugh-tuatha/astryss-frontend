@@ -2,6 +2,8 @@ import { Space_Grotesk, JetBrains_Mono, Inter_Tight } from "next/font/google"
 import type { Metadata } from "next";
 import "./globals.css";
 
+import { Analytics } from '@vercel/analytics/react'
+
 import { Toaster } from "@/vendor/ui/sonner"
 
 import ReactQueryProvider from "@/shared/providers/react-query-provider";
@@ -52,6 +54,7 @@ export default async function RootLayout({
         <ReactQueryProvider>
           <Header />
           {children}
+          <Analytics />
           <Footer />
           <Toaster />
         </ReactQueryProvider>
